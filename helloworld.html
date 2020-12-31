@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<script type="text/javascript">
+		var names = ["A","B","C","D","E","F","G","H","I","J"];
+		var addr = ['경기', '강원', '서울', '인천', '경기', '경기','서울', '경기', '서울', '인천'];
+		var clas = [1, 2, 1, 1, 2, 3, 3, 4, 4, 3];
+		var teacher = ['1담임','2담임','1담임','1담임','2담임','3담임','3담임','4담임','4담임','3담임'];
+		var parent = ['Kim', 'Hong', 'Baek', 'Song', 'Hwang', 'Ki', 'Son', 'Choi', 'Lee', 'Kwon'];
+		var parent_num = ['01011111111','01012111111','01011121111','01011111221','01022211111','01013432111','01022111211','01011222211','01012121212','01011122222'];
+		var enterance_temperature = [36.5, 36.5, 36.5, 36.5, 36.5, 36.5, 36.5, 36.5, 36.5, 36.5, 36.5];
+		var exit_temperature = [];
+
+		function start() {
+			while(true){
+				console.log('-------------------------------------------')
+				console.log('1. 아동현황  2. 체온입력  3. 체온확인  4. 종료')
+				console.log('-------------------------------------------')
+				var input = prompt("원하는 서비스의 번호를 입력하세요. :")
+
+				if (input == 1) {
+					console.log('아동이름   반   교사이름   주소   보호자   보호자연락처')
+					for(i = 0; i < names.length; i++){
+						console.log('   ' + names[i] + '       ' + clas[i] + '    ' +  teacher[i] + '     ' +  addr[i] + '    ' +  parent[i] + '      ' +  parent_num[i])
+					}
+				}
+
+				if (input == 2) {
+					while(true){
+						var temp = prompt('1. 등원체온  2. 하원체온')
+						if (temp == 1){
+							if (enterance_temperature.length != 0) {
+								console.log("등원체온이 이미 등록되었습니다.")
+								break
+							}
+							else{
+								for(i = 0; i < names.length; i++){
+									var temp = prompt(names[i] + '의 체온 : ')
+									enterance_temperature.push(temp)
+								}
+								console.log(names.length + '명 등원체온 등록 완료되었습니다.')
+								break
+							}
+						}
+						if (temp == 2) {
+							if (exit_temperature != 0) {
+								console.log('하원체원이 이미 등록되었습니다.')
+								break
+							}
+							else{
+								for(i = 0; i < names.length; i++){
+									var temp = prompt(names[i] + '의 체온 : ')
+									exit_temperature.push(temp)
+								}
+								console.log(names.length + '명 하원체온 등록 완료되었습니다.')
+								break
+							}
+						}
+					}
+				}
+
+				if (input == 3) {
+					var enterance_temperature_error = []
+					var exit_temperature_error = []
+					console.log('아동이름  등원체온   하원체온')
+					for(i = 0; i < names.length; i++){
+						console.log('   ' + names[i] + '      ' + enterance_temperature[i] + '       ' + exit_temperature[i])
+					}
+					for(i = 0; i < names.length; i++){
+						if(enterance_temperature[i] > 37 || enterance_temperature[i] < 35){
+							enterance_temperature_error.push(names[i])
+						}
+						else if (exit_temperature[i] > 37 || exit_temperature[i] < 35) {
+							exit_temperature_error.push(names[i])
+						}
+					}
+					console.log('등원체온 이상자 : ' + enterance_temperature_error)
+					console.log('하원체온 이상자 : ' + exit_temperature_error)
+				}
+
+				if (input == 4){
+					console.log('종료되었습니다.')
+					break
+				}
+			}
+		}
+		start()
+	</script>
+
+</body>
+</html>
